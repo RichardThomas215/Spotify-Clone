@@ -13,7 +13,7 @@ function App() {
   const[{ user, token }, dispatch] = useDataLayerValue();
 
   //Run code based on a given condition
-  useEffect(() =>{
+  useEffect(() => {
       const hash = getTokenFromUrl();
       window.location.hash = "";
       const _token = hash.access_token;
@@ -44,6 +44,13 @@ function App() {
         });
       }
       
+       spotify.getPlaylist('37i9dQZEVXcQOurjPOTPGO').then(response =>{
+            dispatch({
+              type: "SET_DISCOVER_WEEKLY",
+              discover_weekly: response,     
+            })
+       });
+
       console.log("I HAVE A TOKEN>>> ", token);
   }, []);
 
