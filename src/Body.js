@@ -2,6 +2,9 @@ import React from 'react';
 import './Body.css'
 import Header from './Header';
 import { useDataLayerValue } from './DataLayer';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import PlayCircleFilled from '@material-ui/icons/PlayCircleFilled';
+import  MoreHorizIcon  from '@material-ui/icons/MoreHoriz';
 
 function Body({ spotify }) {
 
@@ -25,6 +28,16 @@ function Body({ spotify }) {
         </div>
 
       </div>
+
+      <div className="body__songs">
+        <div className="body__icons">
+          <PlayCircleFilled className="body__shuffle"/>
+          <FavoriteIcon fontSize="large" />
+          <MoreHorizIcon/>
+        </div>
+
+      </div>
+
     </div>
   );
 }
