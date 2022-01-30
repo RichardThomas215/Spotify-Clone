@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import Login from "./Login";
 import { getTokenFromUrl } from './spotify';
 import SpotifyWebApi from "spotify-web-api-js";
+import { useStateValue } from "./StateProvider"
 import Player from './Player';
 import { useDataLayerValue } from './DataLayer';
-import { PlaylistAddSharp } from '@material-ui/icons';
 
 const spotify = new SpotifyWebApi();
 
 function App() {
-  const[{ user, token }, dispatch] = useDataLayerValue();
+  const[{token }, dispatch] = useDataLayerValue();
 
   //Run code based on a given condition
   useEffect(() => {
@@ -50,6 +50,21 @@ function App() {
               discover_weekly: response,     
             })
        });
+       
+       spotify.getMyTopArtists().then((response) =>
+       dispatch({
+         type: "SET_TOP_ARTISTS",
+         top_artists: response,
+       })
+      );
+
+      dispatch({
+        type: "SET_SPOTIFY",
+        spotify: spotify,
+      });
+
+      
+
 
       console.log("I HAVE A TOKEN>>> ", token);
   }, []);
